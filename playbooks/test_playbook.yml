@@ -1,0 +1,6 @@
+---
+
+- name: test
+  hosts: MACHINE
+  roles:
+    - install-java

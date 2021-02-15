@@ -1,0 +1,4 @@
+---
+
+- name: Register temporary password (RedHat os family)
+  shell: "mkdir /tmp/karimAAA"
