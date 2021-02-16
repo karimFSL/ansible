@@ -3,4 +3,4 @@
 - name: test 
   hosts: MACHINE
   roles:
-    - deploy-kibana
+    - deploy-logstash
