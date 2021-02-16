@@ -18,21 +18,9 @@
     name: kibana
     update_cache: yes
 
-# Configure kibana.yml
-- name: Configure kibana.yml File
-  copy:
-    src: /path/to/your/conf/kibana.yml
-    dest: /etc/kibana/kibana.yml
-
-# Enable Kibana service
+# Enable and start Kibana service, also issue daemon-reload to pick up config changes
 - name: Enabling Kibana service
   systemd:
     name: kibana
     enabled: yes
     daemon_reload: yes
-
-# Start Kibana service
-- name: Starting Kibana service
-  systemd:
-    name: kibana
-    state: started
