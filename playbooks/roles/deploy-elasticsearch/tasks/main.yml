@@ -27,6 +27,14 @@
     enabled: yes
     masked: no
 
+- name: Pass variables to role
+  include_role:
+    name: elk-jvm-options
+  vars:
+    jvm_options_path: /etc/elasticsearch/jvm.options
+    jvm_xms: 512M
+    jvm_xmx: 512M
+
 - name: ensure elasticsearch is running
   systemd:
     name: elasticsearch

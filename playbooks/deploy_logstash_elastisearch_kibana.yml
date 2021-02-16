@@ -7,3 +7,4 @@
     - { role: deploy-elasticsearch, tags: 'elasticsearch' }
     - { role: deploy-kibana, tags: 'kibana' } 
     - { role: deploy-logstash, tags: 'logstash' }
+    - { role: elk-jvm-options, tags: 'jvm-options' }
