@@ -2,11 +2,11 @@
 - name: Set min JVM Heap size.
   lineinfile:
     dest: "{{ jvm_options_path }}"
-    regexp: "^-Xms"
+    regexp: ".*-Xms.*"
     line: "-Xms{{ jvm_xms }}"
 
 - name: Set max JVM Heap size.
   lineinfile:
     dest: "{{ jvm_options_path }}"
-    regexp: "^-Xmx"
+    regexp: ".*-Xmx.*"
     line: "-Xmx{{ jvm_xmx }}"
