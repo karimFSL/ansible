@@ -3,4 +3,4 @@
 - name: test 
   hosts: MACHINE
   roles:
-    - install-openjdk
+    - install-elk-prerequisites
