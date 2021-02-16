@@ -1,0 +1,15 @@
+---
+#
+# Installing openJDK
+#
+# Install openJDK 8
+- name: Install openJDK 8
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - openjdk-8-jdk
+    - openssl  
+    - apt-transport-https
+  become: true  

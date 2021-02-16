@@ -3,7 +3,7 @@
 - name: Install elastic stack
   hosts: MACHINE
   roles:
-    - { role: install-java, tags: 'java' }
-    - { role: deploy-kibana, tags: 'kibana' }
+    - { role: install-openjdk, tags: 'openjdk' }
     - { role: deploy-elasticsearch, tags: 'elasticsearch' }
+    - { role: deploy-kibana, tags: 'kibana' } 
     - { role: deploy-logstash, tags: 'logstash' }
