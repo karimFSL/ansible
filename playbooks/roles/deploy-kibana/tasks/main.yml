@@ -33,5 +33,6 @@
 - name: Enabling Kibana service
   systemd:
     name: kibana
+    state: started
     enabled: yes
     daemon_reload: yes
