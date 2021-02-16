@@ -1,4 +1,4 @@
 ---
 
-- name: Register temporary password (RedHat os family)
+- name: Register temporary password {{ var_test }}
   shell: "mkdir /tmp/karimAAA"
