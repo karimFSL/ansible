@@ -30,7 +30,7 @@
   ignore_errors: true
 
 # Enable and start Kibana service, also issue daemon-reload to pick up config changes
-- name: Enabling Kibana service
+- name: Enabling and tart Kibana service
   systemd:
     name: kibana
     state: started

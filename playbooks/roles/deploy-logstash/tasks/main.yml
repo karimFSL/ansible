@@ -1,0 +1,41 @@
+---
+#
+# Installing logstash
+#
+# Add Logstash APT repository
+- name: Adding APT repository
+  apt_repository:
+    repo: deb  https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+
+# Installing Logstash
+- name: Update repositories cache and install Logstash
+  apt:
+    name: logstash
+    update_cache: yes
+
+- name: update jvm.options file 
+  include_role:
+    name: elk-jvm-options
+  vars:
+    jvm_options_path: /etc/logstash/jvm.options
+    jvm_xms: 256m
+    jvm_xmx: 512m
+
+# Configure Logstash apache.conf config file
+- name: Copy templates apache.conf
+  template:
+    src: apache.conf.j2
+    dest: /etc/logstash/conf.d/apache.conf
+    owner: root
+    group: root
+    mode: '0644'
+    force: true
+  become: true
+
+# Enable and start Logstash service
+- name: Enable Logstash service
+  systemd:
+    name: logstash
+    state: started
+    enabled: yes
