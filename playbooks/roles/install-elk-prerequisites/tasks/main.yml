@@ -1,9 +1,9 @@
 ---
 #
-# Installing openJDK
+# Installing Packages
 #
-# Install openJDK 8
-- name: Install openJDK 8
+# Install Packages
+- name: Install Packages
   apt:
     name: "{{ item }}"
     state: present

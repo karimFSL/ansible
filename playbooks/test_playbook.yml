@@ -3,4 +3,4 @@
 - name: test 
   hosts: MACHINE
   roles:
-    - install-elk-prerequisites
+    - deploy-elasticsearch
