@@ -1,0 +1,11 @@
+---
+
+- name: NEXUS | Purge
+  import_tasks: nexus_purge.yml
+  tags:
+    - nexus_purge
+
+- name: NEXUS | Install
+  import_tasks: nexus_install.yml
+  tags:
+    - nexus_install
