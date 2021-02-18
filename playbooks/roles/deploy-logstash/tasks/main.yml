@@ -33,6 +33,7 @@
     force: true
   become: true
 
+# sudo usermod -a -G adm logstash
 # Adding existing user logstash to group adm
 - name: adding existing user logstash to group adm
   user:
