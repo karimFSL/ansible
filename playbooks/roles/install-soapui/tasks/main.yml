@@ -1,0 +1,37 @@
+---
+
+- name: Install dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ soapui_required_libs }}"
+
+- name: Create SoapUI Directory
+  file:
+    name: "{{ soapui_install_path }}"
+    state: directory
+
+- name: Download SoapUI binaries
+  get_url:
+    url: "{{ soapui_url }}"
+    dest: "~/soapui-{{ soapui_version }}.tar.gz"
+
+- name: Untar SoapUI
+  unarchive:
+    copy: no
+    src: "~/soapui-{{ soapui_version }}.tar.gz"
+    dest: "{{ soapui_install_path }}"
+
+- name: Create SoapUI version directory
+  file:
+    src: "{{ soapui_install_path }}//SoapUI-{{ soapui_version }}"
+    path: "{{ soapui_install_path }}/latest"
+    state: link
+
+- name: Create symlink
+  file:
+    src: "{{ soapui_install_path }}/latest/bin/soapui.sh"
+    dest: "/usr/bin/soapui"
+    state: link
+  become: yes

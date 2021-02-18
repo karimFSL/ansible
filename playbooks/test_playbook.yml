@@ -3,4 +3,4 @@
 - name: test 
   hosts: MACHINE
   roles:
-    - install-nexus
+    - install-soapui
