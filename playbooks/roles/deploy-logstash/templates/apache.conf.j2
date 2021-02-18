@@ -1,31 +1,32 @@
 input {
-	file {
-        path => "/var/log/apache2/access.log"
-        start_position => "beginning"
-        sincedb_path => "/dev/null"
-	}
+  file {
+    path => "/var/log/apache2/access.log"
+    start_position => "beginning"
+    sincedb_path => "/dev/null"
+  }
 }
 
 filter {
-	grok {
-    	match => { "message" => "%{COMBINEDAPACHELOG}" }
-	}
+  grok {
+    match => { "message" => "%{COMBINEDAPACHELOG}" }
+  }
 
-	date {
-    	match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
-	}
+  date {
+    match => [ "timestamp" , "dd/MMM/yyyy:HH:mm:ss Z" ]
+  }
 
-	mutate {
-    	convert => {
-        	"response" => "integer"
-        	"bytes" => "integer"
-    	}
-	}
+  mutate {
+    convert => {
+      "response" => "integer"
+      "bytes" => "integer"
+    }
+  }
 }
 
 output {
-	elasticsearch {
-     	hosts => ["localhost:9200"]
-     	index => "apache-%{+YYYY.MM.dd}"
-	}
+  elasticsearch {
+    hosts => ["localhost:9200"]
+    index => "apache-%{+YYYY.MM.dd}"
+  }
+  stdout { codec => rubydebug }
 }
