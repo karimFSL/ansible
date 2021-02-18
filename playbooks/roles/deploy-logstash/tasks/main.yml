@@ -33,6 +33,13 @@
     force: true
   become: true
 
+# Adding existing user logstash to group adm
+- name: adding existing user logstash to group adm
+  user:
+    name: logstash
+    groups: adm
+    append: yes
+
 # Enable and start Logstash service
 - name: Enable Logstash service
   systemd:

@@ -28,5 +28,4 @@ output {
     hosts => ["localhost:9200"]
     index => "apache-%{+YYYY.MM.dd}"
   }
-  stdout { codec => rubydebug }
 }
