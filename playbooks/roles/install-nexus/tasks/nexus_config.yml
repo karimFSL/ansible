@@ -1,4 +1,5 @@
 ---
+
 - name: NEXUS | Setup Nexus Xms
   lineinfile:
     dest: "{{ nexus_installation_path }}/bin/nexus.vmoptions"
@@ -48,37 +49,8 @@
     line: "-Djava.util.prefs.userRoot={{ nexus_tmp_path }}.java"
   notify: restart nexus
 
-- name: NEXUS | Setup JMX 
+- name: Set nexus user
   lineinfile:
-    dest: "{{ nexus_installation_path }}/bin/nexus.vmoptions"
-    regexp: "^{{ item.key }}=.*"
-    line: "{{ item.key }}={{ item.value }}"
-  notify: restart nexus
-  loop: "{{ nexus_jmx_properties }}"
-  when: nexus_jmx_enabled
-
-- name: NEXUS | Download composer repository plugin
-  get_url:
-    url: https://search.maven.org/remotecontent?filepath=org/sonatype/nexus/plugins/nexus-repository-composer/{{ item.plugin_version }}/nexus-repository-composer-{{ item.plugin_version }}-bundle.kar
-    dest: "{{ nexus_installation_path }}/deploy"
-  with_items:
-    - "{{ nexus_repositories_composer }}"
-
-- name: NEXUS | Copy configuration
-  template:
-    src: nexus.properties.j2
-    dest: "{{ nexus_data_path }}/etc/nexus.properties"
-    owner: "{{ nexus_user }}"
-    group: "{{ nexus_group }}"
-  notify: restart nexus
-
-- name: NEXUS | First-time install admin password
-  set_fact:
-    current_nexus_admin_password: 'admin123'
-  when: nexus_check|failed
-
-- name: NEXUS | Actual admin password
-  set_fact:
-    current_nexus_admin_password: "{{ nexus_admin_password }}"
-  when: nexus_check|success
-  no_log: true
+    dest: "{{ nexus_installation_path }}/bin/nexus.rc"
+    regexp: ".*run_as_user=.*"
+    line: "run_as_user=\"{{ nexus_user }}\""

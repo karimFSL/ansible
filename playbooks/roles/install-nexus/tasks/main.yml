@@ -9,3 +9,9 @@
   import_tasks: nexus_install.yml
   tags:
     - nexus_install
+
+
+- name: NEXUS | Config
+  import_tasks: nexus_config.yml
+  tags:
+    - nexus_config    

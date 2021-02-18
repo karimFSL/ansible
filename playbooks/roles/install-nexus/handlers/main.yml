@@ -3,4 +3,5 @@
   systemd:
     name: nexus
     state: restarted
+    daemon_reload: yes
   when: nexus_service_state != 'stopped'
