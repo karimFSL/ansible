@@ -11,8 +11,10 @@
   service:
     name: nexus
     state: stopped
+  ignore_errors: true  
 
 - name: "remove nexus package"
   package:
     name: nexus
     state: absent
+  ignore_errors: true  
