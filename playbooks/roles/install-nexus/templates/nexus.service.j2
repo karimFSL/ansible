@@ -7,7 +7,7 @@ Type=forking
 LimitNOFILE={{ nexus_max_filedescriptors }}
 ExecStart={{ nexus_installation_path }}/nexus-latest/bin/nexus start
 ExecStop={{ nexus_installation_path }}/nexus-latest/bin/nexus stop
-User={{ nexus__user }}
+User={{ nexus_user }}
 Restart=on-abort
 
 [Install]
