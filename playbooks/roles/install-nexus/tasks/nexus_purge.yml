@@ -5,7 +5,7 @@
     state: absent
   with_items:
   - "{{ nexus_data_path }}"
-  - "{{ nexus_installation_path }}/nexus-{{ nexus_version }}"
+  - "{{ nexus_installation_path }}"
 
 - name: "service stop"
   service:
