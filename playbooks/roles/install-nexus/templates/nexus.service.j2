@@ -5,8 +5,8 @@ After=network.target
 [Service]
 Type=forking
 LimitNOFILE={{ nexus_max_filedescriptors }}
-ExecStart={{ nexus_installation_path }}/nexus-latest/bin/nexus start
-ExecStop={{ nexus_installation_path }}/nexus-latest/bin/nexus stop
+ExecStart={{ nexus_installation_path }}/bin/nexus start
+ExecStop={{ nexus_installation_path }}/bin/nexus stop
 User={{ nexus_user }}
 Restart=on-abort
 
