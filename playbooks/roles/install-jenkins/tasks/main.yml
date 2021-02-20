@@ -1,0 +1,7 @@
+---
+
+- name: JENKINS | Install ( Debian )
+  import_tasks: install_debian.yml
+  tags:
+    - jenkins_install_debian
+

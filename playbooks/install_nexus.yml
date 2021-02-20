@@ -1,0 +1,7 @@
+---
+
+- name: Install nexus
+  hosts: MACHINE
+  gather_facts: no
+  roles:
+    - { role: install-nexus, tags: 'nexus' }
