@@ -10,3 +10,7 @@
   tags:
     - jenkins_install_debian
 
+- name: JENKINS | Settings
+  import_tasks: settings.yml
+  tags:
+    - jenkins_settings

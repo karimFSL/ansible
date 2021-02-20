@@ -1,41 +1,45 @@
 ---
-- name: Import the Elastic Key
-  apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    state: present
 
-- name: Adding Elastic APT repository
-  apt_repository:
-    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
-    state: present
-    filename: elastic-7.x.list
-    update_cache: yes
+- name: Check if jenkins_init_file exists.
+  stat:
+    path: "{{ jenkins_init_file }}"
+  register: jenkins_init_file_stat
 
-- name: install elasticsearch
-  apt:
-    name: elasticsearch
-    state: present
-    update_cache: yes
+- name: Ensure jenkins_init_file exists.
+  file:
+    path: "{{ jenkins_init_file }}"
+    state: touch
+    mode: 0644
+  when: not jenkins_init_file_stat.stat.exists
 
-- name: reload systemd config
-  systemd:
-    daemon_reload: yes
 
-- name: enable service elasticsearch and ensure it is not masked
-  systemd:
-    name: elasticsearch
-    enabled: yes
-    masked: no
+- name: Ensure jenkins_home {{ jenkins_home }} exists.
+  file:
+    path: "{{ jenkins_home }}"
+    state: directory
+    owner: jenkins
+    group: jenkins
+    mode: u+rwx
+    follow: true
 
-- name: Pass variables to role
-  include_role:
-    name: elk-jvm-options
-  vars:
-    jvm_options_path: /etc/elasticsearch/jvm.options
-    jvm_xms: 512M
-    jvm_xmx: 512M
+- name: Set the Jenkins home directory.
+  lineinfile:
+    dest: "{{ jenkins_init_file }}"
+    regexp: '^JENKINS_HOME=.*'
+    line: 'JENKINS_HOME={{ jenkins_home }}'
+    mode: 0644
+  register: jenkins_home_config
 
-- name: ensure elasticsearch is running
-  systemd:
-    name: elasticsearch
-    state: started
+
+- name: Set HTTP port in Jenkins config.
+  lineinfile:
+    backrefs: true
+    dest: "{{ jenkins_init_file }}"
+    regexp: '^{{ jenkins_http_port_param }}='
+    line: '{{ jenkins_http_port_param }}={{ jenkins_http_port }}'
+    mode: 0644
+  register: jenkins_http_config
+
+# Trigger all handlers
+- name: Trigger handlers immediately in case Jenkins was installed
+  meta: flush_handlers

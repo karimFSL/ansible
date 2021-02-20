@@ -5,7 +5,7 @@
     state: stopped
   ignore_errors: true  
 
-- name: "remove nexus package"
+- name: "remove jenkins package"
   apt:
     name: jenkins
     state: absent
