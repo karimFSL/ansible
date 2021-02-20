@@ -1,0 +1,12 @@
+---
+- name: "service stop"
+  service:
+    name: jenkins
+    state: stopped
+  ignore_errors: true  
+
+- name: "remove nexus package"
+  apt:
+    name: jenkins
+    state: absent
+  ignore_errors: true  

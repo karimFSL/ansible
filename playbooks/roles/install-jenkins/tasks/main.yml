@@ -1,5 +1,10 @@
 ---
 
+- name: JENKINS | Purge 
+  import_tasks: jenkins_purge.yml
+  tags:
+    - jenkins_purge
+
 - name: JENKINS | Install ( Debian )
   import_tasks: install_debian.yml
   tags:
