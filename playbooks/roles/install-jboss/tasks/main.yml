@@ -11,6 +11,6 @@
     - jboss_install
 
 - name: JBOSS | Config
-  import_tasks: jbosss_config.yml
+  import_tasks: jboss_config.yml
   tags:
     - jboss_config    
