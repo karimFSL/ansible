@@ -38,6 +38,7 @@
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
     state: link
+  become: yes  
 
 - name: JBOSS | Change  Jboss symbolic link owner
   file:
@@ -45,6 +46,7 @@
     dest: "/opt/wildfly"
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
+  become: yes  
 
 - name: JBOSS | Create wildfly directory 
   file:
