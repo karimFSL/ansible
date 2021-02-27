@@ -32,7 +32,7 @@
     dest: "/opt"
 
 - name: Rename wildfly-{{ jboss_version }} to wildfly
-    command: mv /opt//wildfly-{{ jboss_version }} /opt/wildfly
+  command: mv /opt//wildfly-{{ jboss_version }} /opt/wildfly
 
 - name: JBOSS | Create wildfly directory 
   file:
