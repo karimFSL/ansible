@@ -48,12 +48,14 @@
 
 - name: JBOSS | copy conf
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
     dest: "/etc/wildfly"
 
 
 - name: JBOSS | copy launch.sh
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
     dest: "/opt/wildfly/bin"
     owner: "{{ jboss_user }}"
@@ -63,6 +65,7 @@
 
 - name: JBOSS | copy service file and start service
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service"
     dest: "/etc/systemd/system"
   notify:
