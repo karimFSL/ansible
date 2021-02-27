@@ -10,7 +10,7 @@
   tags:
     - jboss_install
 
-# - name: JBOSS | Config
-#   import_tasks: jbosss_config.yml
-#   tags:
-#     - jboss_config    
+- name: JBOSS | Config
+  import_tasks: jbosss_config.yml
+  tags:
+    - jboss_config    

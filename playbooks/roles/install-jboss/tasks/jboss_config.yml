@@ -1,0 +1,3 @@
+---
+- name: create user wildfly-{{ jboss_version }} to wildfly
+  command: /opt/wildfly/bin/add-user.sh -u 'admin' -p 'password1' 

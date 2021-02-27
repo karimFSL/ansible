@@ -41,11 +41,6 @@
     path: "/etc/wildfly"
     state: directory
 
-- name: JBOSS | Create wildfly directory 
-  file:
-    path: "/etc/wildfly"
-    state: directory
-
 - name: JBOSS | copy conf
   copy:
     remote_src: true
@@ -62,7 +57,7 @@
     group: "{{ jboss_group }}"
     mode: 0755
 
-
+#enable service
 - name: JBOSS | copy service file and start service
   copy:
     remote_src: true
