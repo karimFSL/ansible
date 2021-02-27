@@ -31,22 +31,16 @@
     src: "{{ jboss_artifacts_dl_dest_dir }}/wildfly-{{ jboss_version }}.tar.gz"
     dest: "/opt"
 
-- name: JBOSS | Create Jboss symbolic link directory
-  file:
-    src: "/opt/wildfly-{{ jboss_version }}"
-    path: "/opt/wildfly"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
-    state: link
-  become: yes  
+- name: Rename wildfly-{{ jboss_version }} to wildfly
+    command: mv /opt//wildfly-{{ jboss_version }} /opt/wildfly
 
-- name: JBOSS | Change  Jboss symbolic link owner
+- name: JBOSS | Create wildfly directory 
   file:
-    remote_src: true
-    dest: "/opt/wildfly"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
-  become: yes  
+    path: "/etc/wildfly"
+    owner: "root"
+    group: "root"
+    state: directory
+  become: yes    
 
 - name: JBOSS | Create wildfly directory 
   file:
