@@ -14,5 +14,5 @@
     - "/opt/wildfly-{{ jboss_version }}"
     - "/opt/wildfly"
     - "/etc/wildfly"
-    - "etc/systemd/system/wildfly.service"
+    - "/etc/systemd/system/wildfly.service"
   notify: reload systemd config
