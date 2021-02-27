@@ -55,17 +55,16 @@
 
 - name: JBOSS | copy conf
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
     dest: "/etc/wildfly"
-    owner: "root"
-    group: "root"
+    mode: 0755
 
 - name: JBOSS | copy launch.sh
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
     dest: "/etc/wildfly/bin"
-    owner: "root"
-    group: "root"
     mode: 0755
 
 - name: JBOSS | copy service file and start service
