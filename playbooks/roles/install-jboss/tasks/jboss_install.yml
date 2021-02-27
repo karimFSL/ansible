@@ -57,6 +57,8 @@
   copy:
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
     dest: "/etc/wildfly"
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
 
 - name: JBOSS | copy launch.sh
   copy:
