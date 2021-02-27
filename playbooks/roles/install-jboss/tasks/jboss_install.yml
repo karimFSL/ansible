@@ -57,15 +57,15 @@
   copy:
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
     dest: "/etc/wildfly"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
+    owner: "root"
+    group: "root"
 
 - name: JBOSS | copy launch.sh
   copy:
     src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
     dest: "/etc/wildfly/bin"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
+    owner: "root"
+    group: "root"
     mode: 0755
 
 - name: JBOSS | copy service file and start service
