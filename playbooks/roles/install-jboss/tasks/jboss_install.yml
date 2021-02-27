@@ -48,8 +48,8 @@
 - name: JBOSS | Create wildfly directory 
   file:
     path: "/etc/wildfly"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
+    owner: "root"
+    group: "root"
     state: directory
   become: yes
 
@@ -58,21 +58,28 @@
     remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
     dest: "/etc/wildfly"
-    owner: "{{ jboss_user }}"
-    group: "{{ jboss_group }}"
+    owner: "root"
+    group: "root"
     mode: 0755
+  become: yes
 
 - name: JBOSS | copy launch.sh
   copy:
     remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
     dest: "/etc/wildfly/bin"
+    owner: "root"
+    group: "root"
     mode: 0755
+  become: yes
 
 - name: JBOSS | copy service file and start service
   copy:
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service"
     dest: "/etc/systemd/system"
+    owner: "root"
+    group: "root"
+  become: yes  
   notify:
     - reload systemd config
     - start jboss
