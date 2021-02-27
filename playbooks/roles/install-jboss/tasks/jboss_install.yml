@@ -47,11 +47,11 @@
 
 - name: JBOSS | Create wildfly directory 
   file:
-    dest: "/etc/wildfly"
+    path: "/etc/wildfly"
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
     state: directory
-    mode: 0755
+  become: yes
 
 - name: JBOSS | copy conf
   copy:
