@@ -1,0 +1,18 @@
+---
+- name: "service stop"
+  service:
+    name: wildfly
+    state: stopped
+    enabled: no
+  ignore_errors: true  
+
+- name: "Purge JBOSS source and service"
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/opt/wildfly-{{ jboss_version }}"
+    - "/opt/wildfly"
+    - "/etc/wildfly"
+    - "etc/systemd/system/wildfly.service"
+  notify: reload systemd config

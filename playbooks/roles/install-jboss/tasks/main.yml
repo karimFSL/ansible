@@ -1,0 +1,16 @@
+---
+
+- name: JBOSS | Purge
+  import_tasks: jboss_purge.yml
+  tags:
+    - jboss_purge
+
+# - name: JBOSS | Install
+#   import_tasks: jboss_install.yml
+#   tags:
+#     - jboss_install
+
+# - name: JBOSS | Config
+#   import_tasks: jbosss_config.yml
+#   tags:
+#     - jboss_config    

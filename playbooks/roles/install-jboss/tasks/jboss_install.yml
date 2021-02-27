@@ -1,0 +1,70 @@
+---
+- name: JBOSS | Ensure jboss group
+  group:
+    name: "{{ jboss_group }}"
+    system: yes
+    state: present
+
+- name: JBOSS | Ensure jboss user
+  user:
+    name: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    system: yes
+    shell: /sbin/nologin
+    createhome: no
+
+- name: JBOSS | Install dependencies
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ jboss_required_libs }}"
+
+- name: JBOSS | Download binaries
+  get_url:
+    url: "{{ jboss_url }}"
+    dest: "{{ jboss_artifacts_dl_dest_dir }}/wildfly-{{ jboss_version }}.tar.gz"
+
+- name: JBOSS | Untar binaries
+  unarchive:
+    copy: no
+    src: "{{ jboss_artifacts_dl_dest_dir }}/wildfly-{{ jboss_version }}.tar.gz"
+    dest: "/opt"
+
+- name: JBOSS | Create Jboss symbolic link directory
+  file:
+    src: "opt//wildfly-{{ jboss_version }}"
+    path: "opt/wildfly"
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    state: link
+
+- name: JBOSS | Create wildfly directory 
+  file:
+    dest: "/etc/wildfly"
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    state: directory
+    mode: 0755
+
+- name: JBOSS | copy conf
+  copy:
+    src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.conf"
+    dest: "/etc/wildfly"
+
+- name: JBOSS | copy launch.sh
+  copy:
+    src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
+    dest: "/etc/wildfly/bin"
+    owner: "{{ jboss_user }}"
+    group: "{{ jboss_group }}"
+    mode: 0755
+
+
+- name: JBOSS | copy service file and start service
+  copy:
+    src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service"
+    dest: "/etc/systemd/system"
+  notify:
+    - reload systemd config
+    - start jboss
