@@ -60,14 +60,13 @@
     dest: "/etc/wildfly"
     owner: "root"
     group: "root"
-    mode: 0755
   become: yes
 
 - name: JBOSS | copy launch.sh
   copy:
     remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/launch.sh"
-    dest: "/etc/wildfly/bin"
+    dest: "/opt/wildfly/bin"
     owner: "root"
     group: "root"
     mode: 0755
