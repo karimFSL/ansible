@@ -75,6 +75,7 @@
 
 - name: JBOSS | copy service file and start service
   copy:
+    remote_src: true
     src: "/opt/wildfly/docs/contrib/scripts/systemd/wildfly.service"
     dest: "/etc/systemd/system"
     owner: "root"
