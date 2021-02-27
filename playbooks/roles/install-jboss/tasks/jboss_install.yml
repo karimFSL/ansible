@@ -33,8 +33,8 @@
 
 - name: JBOSS | Create Jboss symbolic link directory
   file:
-    src: "opt/wildfly-{{ jboss_version }}"
-    path: "opt/wildfly"
+    src: "/opt/wildfly-{{ jboss_version }}"
+    path: "/opt/wildfly"
     owner: "{{ jboss_user }}"
     group: "{{ jboss_group }}"
     state: link
