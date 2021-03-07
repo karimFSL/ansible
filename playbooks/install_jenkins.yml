@@ -1,0 +1,7 @@
+---
+
+- name: Install jenkins
+  hosts: MACHINE
+  gather_facts: no
+  roles:
+    - { role: install-jenkins, tags: 'jenkins' }
